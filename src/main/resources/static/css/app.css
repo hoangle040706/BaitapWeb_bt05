@@ -592,3 +592,185 @@ button {
   font-size: 0.875rem;
   color: var(--stone-500);
 }
+
+/* Search, Table & Pagination (Template Style) */
+.toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 1 20rem;
+}
+
+.search-input {
+  flex: 1 1 14rem;
+  max-width: 24rem;
+  border-radius: 9999px;
+  border: 1px solid var(--stone-300);
+  background-color: #ffffff;
+  padding: 0.6rem 1.1rem;
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--stone-900);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.search-input:focus {
+  border-color: var(--amber-700);
+  box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.18);
+}
+
+.size-select {
+  border-radius: 9999px;
+  border: 1px solid var(--stone-300);
+  background-color: #ffffff;
+  padding: 0.45rem 0.9rem;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--stone-800);
+  outline: none;
+}
+
+.table-card {
+  overflow-x: auto;
+  border-radius: 1rem;
+  border: 1px solid var(--stone-200);
+  background-color: #ffffff;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.data-table th {
+  padding: 0.9rem 1.15rem;
+  border-bottom: 1px solid var(--stone-200);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--stone-500);
+  background-color: var(--stone-50);
+}
+
+.data-table td {
+  padding: 0.95rem 1.15rem;
+  border-bottom: 1px solid var(--stone-100);
+  vertical-align: middle;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-active {
+  background-color: var(--emerald-50);
+  color: var(--emerald-700);
+}
+
+.badge-inactive {
+  background-color: var(--stone-100);
+  color: var(--stone-600);
+}
+
+.action-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn-table-edit {
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--stone-700);
+  background-color: var(--stone-100);
+  transition: background-color 0.15s ease;
+}
+
+.btn-table-edit:hover {
+  background-color: var(--stone-200);
+}
+
+.btn-table-delete {
+  border: none;
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--red-700);
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+}
+
+.btn-table-delete:hover {
+  background-color: var(--red-50);
+}
+
+.pagination-bar {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pagination-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.page-item a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 0.7rem;
+  border-radius: 9999px;
+  border: 1px solid var(--stone-300);
+  background-color: #ffffff;
+  font-size: 0.85rem;
+  color: var(--stone-700);
+  transition: all 0.15s ease;
+}
+
+.page-item a:hover {
+  background-color: var(--stone-100);
+}
+
+.page-item.active a {
+  border-color: var(--stone-900);
+  background-color: var(--stone-900);
+  color: #ffffff;
+  font-weight: 600;
+}

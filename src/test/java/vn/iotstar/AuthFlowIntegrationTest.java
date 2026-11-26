@@ -4,10 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.data.domain.Page;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
+import vn.iotstar.dto.CategoryDto;
 import vn.iotstar.dto.UserDto;
 import vn.iotstar.entity.Role;
 import vn.iotstar.repository.UserRepository;
@@ -33,13 +35,27 @@ class AuthFlowIntegrationTest {
     private UserRepository userRepository;
 
     @Test
-    void homePageLoadsActiveCategories() throws Exception {
-        MvcResult result = mockMvc.perform(get("/"))
+    @SuppressWarnings("unchecked")
+    void homePageLoadsPaginatedAndSearchableCategories() throws Exception {
+        MvcResult result = mockMvc.perform(get("/").param("size", "4").param("page", "1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("web/home"))
-                .andExpect(model().attributeExists("categories"))
+                .andExpect(model().attributeExists("categoryPage", "pageNumbers"))
                 .andReturn();
         assertThat(result.getResponse().getIncludedUrl()).isEqualTo("/WEB-INF/views/web/home.jsp");
+
+        Page<CategoryDto> page = (Page<CategoryDto>) result.getModelAndView().getModel().get("categoryPage");
+        assertThat(page.getSize()).isEqualTo(4);
+        assertThat(page.getTotalElements()).isGreaterThanOrEqualTo(4);
+
+        MvcResult searchResult = mockMvc.perform(get("/").param("name", "Arabica"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("web/home"))
+                .andExpect(model().attribute("name", "Arabica"))
+                .andReturn();
+        Page<CategoryDto> filtered = (Page<CategoryDto>) searchResult.getModelAndView().getModel().get("categoryPage");
+        assertThat(filtered.getContent()).extracting(CategoryDto::getName)
+                .anyMatch(n -> n.contains("Arabica"));
     }
 
     @Test
@@ -132,5 +148,18 @@ class AuthFlowIntegrationTest {
                 .andExpect(model().attributeExists("categoryCount", "userCount"))
                 .andReturn();
         assertThat(adminResult.getResponse().getIncludedUrl()).isEqualTo("/WEB-INF/views/admin/home.jsp");
+
+        // Admin category search & pagination
+        MvcResult searchPaginated = mockMvc.perform(get("/admin/categories/searchpaginated")
+                        .session(adminSession)
+                        .param("name", "Cà phê")
+                        .param("page", "1")
+                        .param("size", "3"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("admin/category/list"))
+                .andExpect(model().attributeExists("categoryPage", "pageNumbers"))
+                .andExpect(model().attribute("name", "Cà phê"))
+                .andReturn();
+        assertThat(searchPaginated.getResponse().getIncludedUrl()).isEqualTo("/WEB-INF/views/admin/category/list.jsp");
     }
 }

@@ -14,7 +14,7 @@
 
     <div class="admin-tabs">
       <a href="<c:url value='/admin/home'/>" class="admin-tab active">Tổng quan</a>
-      <span class="admin-tab" title="Hoàn thiện ở mốc 30/11/2026">Danh mục (${categoryCount})</span>
+      <a href="<c:url value='/admin/categories/searchpaginated'/>" class="admin-tab">Danh mục (${categoryCount})</a>
       <span class="admin-tab" title="Hoàn thiện ở mốc 30/11/2026">Người dùng (${userCount})</span>
     </div>
 
@@ -22,7 +22,8 @@
       <div class="panel-card">
         <p class="card-meta" style="margin:0;">Tổng số danh mục</p>
         <p class="stat-value">${categoryCount}</p>
-        <p class="card-meta">Sẵn sàng cho CRUD + Tìm kiếm &amp; Phân trang</p>
+        <p class="card-meta" style="margin-bottom:1rem;">Đã tích hợp tìm kiếm, phân trang &amp; CRUD</p>
+        <a href="<c:url value='/admin/categories/searchpaginated'/>" class="btn-primary-pill">Mở danh sách</a>
       </div>
       <div class="panel-card">
         <p class="card-meta" style="margin:0;">Tổng số tài khoản</p>

@@ -11,6 +11,9 @@
 - **Đăng nhập** (`/login`): hỗ trợ đăng nhập bằng `username` hoặc `email`, chống session fixation (`changeSessionId`), điều hướng theo role (`ADMIN` / `USER`).
 - **Đăng xuất** (`/logout`): hủy session và chuyển hướng về `/login?logout`.
 - **Phân quyền route `/admin/**`**: bảo vệ qua `AdminAuthInterceptor` (`HttpSession` + `Role.ADMIN`).
+- **Tìm kiếm & Phân trang (`Pageable`)**:
+  - Trang chủ (`/`): lọc danh mục theo từ khóa `name`, chọn `size` và phân trang.
+  - Trang quản trị danh mục (`/admin/categories/searchpaginated`): tìm kiếm theo `name`, chọn `size`, phân trang `pageNumbers`, kèm thêm/sửa/xóa danh mục.
 
 ## Yêu cầu môi trường
 

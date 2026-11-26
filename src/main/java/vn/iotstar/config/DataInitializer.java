@@ -51,7 +51,16 @@ public class DataInitializer implements CommandLineRunner {
                     Category.builder().name("Cà phê Arabica Cầu Đất").images("arabica.jpg").status(1).build(),
                     Category.builder().name("Cà phê Robusta Honey").images("robusta.jpg").status(1).build(),
                     Category.builder().name("Dụng cụ Pour Over V60").images("pour-over.jpg").status(1).build(),
-                    Category.builder().name("Phin & Bình pha Espresso").images("phin-espresso.jpg").status(1).build()
+                    Category.builder().name("Phin & Bình pha Espresso").images("phin-espresso.jpg").status(1).build(),
+                    Category.builder().name("Cà phê Cold Brew Đặc sản").images("cold-brew.jpg").status(1).build(),
+                    Category.builder().name("Máy xay cà phê thủ công").images("grinder.jpg").status(1).build(),
+                    Category.builder().name("Ấm cổ ngỗng rót nước").images("kettle.jpg").status(1).build()
+            ));
+        } else if (categoryRepository.count() == 4) {
+            categoryRepository.saveAll(List.of(
+                    Category.builder().name("Cà phê Cold Brew Đặc sản").images("cold-brew.jpg").status(1).build(),
+                    Category.builder().name("Máy xay cà phê thủ công").images("grinder.jpg").status(1).build(),
+                    Category.builder().name("Ấm cổ ngỗng rót nước").images("kettle.jpg").status(1).build()
             ));
         }
     }

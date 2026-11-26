@@ -7,7 +7,8 @@
     </a>
     <nav class="site-nav">
       <a href="<c:url value='/'/>" class="nav-link">Trang chủ</a>
-      <a href="<c:url value='/admin/home'/>" class="nav-link active">Tổng quan</a>
+      <a href="<c:url value='/admin/home'/>" class="nav-link">Tổng quan</a>
+      <a href="<c:url value='/admin/categories/searchpaginated'/>" class="nav-pill-dark">Danh mục</a>
       <div class="nav-group">
         <span class="nav-user-name">
           <c:out value="${sessionScope.currentUser.displayName}"/>
