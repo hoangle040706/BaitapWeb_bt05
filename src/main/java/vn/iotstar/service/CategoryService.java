@@ -3,6 +3,7 @@ package vn.iotstar.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import vn.iotstar.dto.CategoryDto;
+import vn.iotstar.dto.CategoryRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,9 +18,9 @@ public interface CategoryService {
 
     Page<CategoryDto> findByNameContaining(String keyword, Pageable page);
 
-    Optional<CategoryDto> findById(Long id);
+    Optional<CategoryRequest> findRequestById(Long id);
 
-    CategoryDto save(CategoryDto dto);
+    CategoryDto save(CategoryRequest request);
 
     void deleteById(Long id);
 

@@ -774,3 +774,26 @@ button {
   color: #ffffff;
   font-weight: 600;
 }
+
+.badge-admin {
+  background-color: var(--amber-50);
+  color: var(--amber-800);
+  border: 1px solid #fde68a;
+}
+
+.badge-user {
+  background-color: var(--stone-100);
+  color: var(--stone-700);
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .form-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}

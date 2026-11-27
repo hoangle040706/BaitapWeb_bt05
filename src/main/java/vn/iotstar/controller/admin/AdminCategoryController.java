@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.iotstar.dto.CategoryDto;
+import vn.iotstar.dto.CategoryRequest;
 import vn.iotstar.exception.BusinessException;
 import vn.iotstar.service.CategoryService;
 import vn.iotstar.util.PaginationHelper;
@@ -61,14 +62,14 @@ public class AdminCategoryController {
 
     @GetMapping("/add")
     public String add(ModelMap model) {
-        model.addAttribute("category", new CategoryDto());
+        model.addAttribute("category", new CategoryRequest());
         model.addAttribute("isEdit", false);
         return "admin/category/addOrEdit";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap model, RedirectAttributes redirectAttributes) {
-        Optional<CategoryDto> opt = categoryService.findById(id);
+        Optional<CategoryRequest> opt = categoryService.findRequestById(id);
         if (opt.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Không tìm thấy danh mục cần sửa.");
             return "redirect:/admin/categories/searchpaginated";
@@ -80,7 +81,7 @@ public class AdminCategoryController {
 
     @PostMapping("/saveOrUpdate")
     public String saveOrUpdate(
-            @Valid @ModelAttribute("category") CategoryDto category,
+            @Valid @ModelAttribute("category") CategoryRequest category,
             BindingResult bindingResult,
             ModelMap model,
             RedirectAttributes redirectAttributes

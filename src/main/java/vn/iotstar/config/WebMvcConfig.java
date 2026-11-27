@@ -33,6 +33,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
             public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
                 if (bean instanceof InternalResourceViewResolver resolver) {
                     resolver.setAlwaysInclude(true);
+                    resolver.setContentType("text/html;charset=UTF-8");
                 }
                 return bean;
             }

@@ -15,20 +15,21 @@
     <div class="admin-tabs">
       <a href="<c:url value='/admin/home'/>" class="admin-tab active">Tổng quan</a>
       <a href="<c:url value='/admin/categories/searchpaginated'/>" class="admin-tab">Danh mục (${categoryCount})</a>
-      <span class="admin-tab" title="Hoàn thiện ở mốc 30/11/2026">Người dùng (${userCount})</span>
+      <a href="<c:url value='/admin/users/searchpaginated'/>" class="admin-tab">Người dùng (${userCount})</a>
     </div>
 
     <div class="stat-grid">
       <div class="panel-card">
         <p class="card-meta" style="margin:0;">Tổng số danh mục</p>
         <p class="stat-value">${categoryCount}</p>
-        <p class="card-meta" style="margin-bottom:1rem;">Đã tích hợp tìm kiếm, phân trang &amp; CRUD</p>
-        <a href="<c:url value='/admin/categories/searchpaginated'/>" class="btn-primary-pill">Mở danh sách</a>
+        <p class="card-meta" style="margin-bottom:1rem;">CRUD đầy đủ với tìm kiếm &amp; phân trang</p>
+        <a href="<c:url value='/admin/categories/searchpaginated'/>" class="btn-primary-pill">Quản lý danh mục</a>
       </div>
       <div class="panel-card">
         <p class="card-meta" style="margin:0;">Tổng số tài khoản</p>
         <p class="stat-value">${userCount}</p>
-        <p class="card-meta">Đã mã hóa mật khẩu bằng BCrypt</p>
+        <p class="card-meta" style="margin-bottom:1rem;">CRUD, lọc theo vai trò/trạng thái &amp; BCrypt</p>
+        <a href="<c:url value='/admin/users/searchpaginated'/>" class="btn-primary-pill">Quản lý người dùng</a>
       </div>
       <div class="panel-card">
         <p class="card-meta" style="margin:0;">Phiên đăng nhập hiện tại</p>

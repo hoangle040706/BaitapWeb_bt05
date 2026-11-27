@@ -24,27 +24,11 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
-        if (userRepository.findByUsernameIgnoreCase("admin").isEmpty()) {
-            userRepository.save(User.builder()
-                    .username("admin")
-                    .email("admin@rangxay.vn")
-                    .fullname("Quản trị viên")
-                    .password(passwordEncoder.encode("Admin@123"))
-                    .role(Role.ADMIN)
-                    .status(1)
-                    .build());
-        }
-
-        if (userRepository.findByUsernameIgnoreCase("user").isEmpty()) {
-            userRepository.save(User.builder()
-                    .username("user")
-                    .email("user@rangxay.vn")
-                    .fullname("Khách hàng mẫu")
-                    .password(passwordEncoder.encode("User@123"))
-                    .role(Role.USER)
-                    .status(1)
-                    .build());
-        }
+        seedUserIfMissing("admin", "admin@rangxay.vn", "Quản trị viên", "Admin@123", Role.ADMIN, 1);
+        seedUserIfMissing("user", "user@rangxay.vn", "Khách hàng mẫu", "User@123", Role.USER, 1);
+        seedUserIfMissing("minhhoang", "hoang@rangxay.vn", "Lê Minh Hoàng", "User@123", Role.ADMIN, 1);
+        seedUserIfMissing("thuhuong", "huong@rangxay.vn", "Trần Thu Hương", "User@123", Role.USER, 1);
+        seedUserIfMissing("quocbao", "bao@rangxay.vn", "Phạm Quốc Bảo", "User@123", Role.USER, 0);
 
         if (categoryRepository.count() == 0) {
             categoryRepository.saveAll(List.of(
@@ -62,6 +46,20 @@ public class DataInitializer implements CommandLineRunner {
                     Category.builder().name("Máy xay cà phê thủ công").images("grinder.jpg").status(1).build(),
                     Category.builder().name("Ấm cổ ngỗng rót nước").images("kettle.jpg").status(1).build()
             ));
+        }
+    }
+
+    private void seedUserIfMissing(String username, String email, String fullname,
+                                   String rawPassword, Role role, int status) {
+        if (userRepository.findByUsernameIgnoreCase(username).isEmpty()) {
+            userRepository.save(User.builder()
+                    .username(username)
+                    .email(email)
+                    .fullname(fullname)
+                    .password(passwordEncoder.encode(rawPassword))
+                    .role(role)
+                    .status(status)
+                    .build());
         }
     }
 }

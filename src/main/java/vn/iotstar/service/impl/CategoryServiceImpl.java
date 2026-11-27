@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import vn.iotstar.dto.CategoryDto;
+import vn.iotstar.dto.CategoryRequest;
 import vn.iotstar.entity.Category;
 import vn.iotstar.exception.BusinessException;
 import vn.iotstar.mapper.CategoryMapper;
@@ -57,23 +58,24 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<CategoryDto> findById(Long id) {
-        return categoryRepository.findById(id).map(categoryMapper::toDto);
+    public Optional<CategoryRequest> findRequestById(Long id) {
+        return categoryRepository.findById(id).map(categoryMapper::toRequest);
     }
 
     @Override
     @Transactional
-    public CategoryDto save(CategoryDto dto) {
+    public CategoryDto save(CategoryRequest request) {
         Category entity;
-        if (dto.getId() != null) {
-            entity = categoryRepository.findById(dto.getId())
+        if (request.getId() != null) {
+            entity = categoryRepository.findById(request.getId())
                     .orElseThrow(() -> new BusinessException("Không tìm thấy danh mục cần cập nhật"));
+            categoryMapper.updateEntity(request, entity);
         } else {
-            entity = new Category();
+            entity = categoryMapper.toEntity(request);
         }
-        entity.setName(dto.getName().trim());
-        entity.setImages(StringUtils.hasText(dto.getImages()) ? dto.getImages().trim() : null);
-        entity.setStatus(dto.getStatus() != null ? dto.getStatus() : 1);
+        entity.setName(request.getName().trim());
+        entity.setImages(StringUtils.hasText(request.getImages()) ? request.getImages().trim() : null);
+        entity.setStatus(request.getStatus() != null ? request.getStatus() : 1);
         return categoryMapper.toDto(categoryRepository.save(entity));
     }
 

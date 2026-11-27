@@ -17,7 +17,7 @@
     <div class="admin-tabs">
       <a href="<c:url value='/admin/home'/>" class="admin-tab">Tổng quan</a>
       <a href="<c:url value='/admin/categories/searchpaginated'/>" class="admin-tab active">Danh mục (${categoryPage.totalElements})</a>
-      <span class="admin-tab" title="Hoàn thiện ở mốc 30/11/2026">Người dùng</span>
+      <a href="<c:url value='/admin/users/searchpaginated'/>" class="admin-tab">Người dùng</a>
     </div>
 
     <c:if test="${not empty message}">
